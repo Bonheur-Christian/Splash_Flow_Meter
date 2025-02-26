@@ -6,7 +6,7 @@
 const char* ssid = "E5576_47AB";       // Replace with your WiFi SSID
 const char* password = "iN5iRhdt67F";  // Replace with your WiFi Password
 
-const char* serverUrl = "http://192.168.56.1:6001/flow-data";
+const char* serverUrl = "http://192.168.8.60:6001/flow-data";
 volatile int pulseCount = 0;
 float flowRate = 0.0;
 unsigned long oldTime = 0;
@@ -38,7 +38,7 @@ void setup() {
 }
 
 void loop() {
-  if ((millis() - oldTime) > 1000) {  // Calculate flow rate every 1 second
+  if ((millis() - oldTime) > 1000) {  // Calculate flow rate every 9 second
     detachInterrupt(digitalPinToInterrupt(SENSOR_PIN));
 
     // Convert pulses to liters per minute (L/min)
@@ -69,7 +69,7 @@ void sendFlowRateToServer(float flow) {
     JsonDoc["flow-rate"] = flow;
 
     String jsonPayload;
-    serializeJson(JsonDoc, jsonPayload);
+    serializeJson(JsonDoc, jsonPayload);     
 
     Serial.print("Sending payload: ");
     Serial.println(jsonPayload);
@@ -92,3 +92,4 @@ void sendFlowRateToServer(float flow) {
     Serial.println("WiFi Disconnected!");
   }
 }
+
