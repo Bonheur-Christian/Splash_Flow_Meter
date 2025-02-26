@@ -2,8 +2,8 @@
 #include <ESP8266HTTPClient.h>
 #include <ArduinoJson.h>
 
-#define SENSOR_PIN 5                  // GPIO2 (D4 on NodeMCU)
-const char* ssid = "E5576_47AB";           // Replace with your WiFi SSID
+#define SENSOR_PIN 5                   // GPIO2 (D4 on NodeMCU)
+const char* ssid = "E5576_47AB";       // Replace with your WiFi SSID
 const char* password = "iN5iRhdt67F";  // Replace with your WiFi Password
 
 const char* serverUrl = "http://192.168.56.1:6001/flow-data";
@@ -65,11 +65,11 @@ void sendFlowRateToServer(float flow) {
     http.begin(client, serverUrl);
     http.addHeader("Content-Type", "application/json");
 
-    // StaticJsonDocument<100> JsonDoc;
-    // JsonDoc["flow-rate"] = flow;
+    StaticJsonDocument<100> JsonDoc;
+    JsonDoc["flow-rate"] = flow;
 
-    String jsonPayload = "{\"flow-rate\": 1.0}";
-      // serializeJson(JsonDoc, jsonPayload);
+    String jsonPayload;
+    serializeJson(JsonDoc, jsonPayload);
 
     Serial.print("Sending payload: ");
     Serial.println(jsonPayload);
