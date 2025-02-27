@@ -5,6 +5,8 @@
 #define SENSOR_PIN 5                   // GPIO2 (D4 on NodeMCU)
 const char* ssid = "E5576_47AB";       // Replace with your WiFi SSID
 const char* password = "iN5iRhdt67F";  // Replace with your WiFi Password
+// const char* ssid = "EdNet";       // Replace with your WiFi SSID
+// const char* password = "Huawei@123";  // Replace with your WiFi Password
 
 const char* serverUrl = "http://192.168.8.60:6001/flow-data";
 volatile int pulseCount = 0;
@@ -74,7 +76,7 @@ void sendFlowRateToServer(float flow) {
     Serial.print("Sending payload: ");
     Serial.println(jsonPayload);
 
-    int httpResponseCode = http.POST(jsonPayload);
+    int httpResponseCode = http.PO ST(jsonPayload);
     String response = http.getString();
 
     Serial.print("Response: ");

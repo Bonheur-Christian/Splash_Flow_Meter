@@ -1,22 +1,16 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
+const flowRouter =require('./routers/flow_rate_router');
 
 const app = express();
 
 app.use(cors());
 app.use(bodyParser.json());
 
+app.use('/',flowRouter); 
+app.use('/flow-data', flowRouter);  
 
-app.post('/flow-data', (req, res) => {
-    console.log("Data received:", req.body);
-    res.json({ messageResponse: "Data received Successfully" });
-
-})
-
-app.get("/", (req, res)=>{
-    res.send("Hello from server");
-});
 
 const port =6001;
 
